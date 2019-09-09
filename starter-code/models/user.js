@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const Schema   = mongoose.Schema;
-
+const { Schema, model } = require("mongoose");
+const PLM   = require("passport-local-mongoose");
+ 
 const userSchema = new Schema({
   username: String,
   password: String
@@ -8,5 +8,5 @@ const userSchema = new Schema({
   timestamps: true
 });
 
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+userSchema.plugin(PLM, { usernameField: "username"})
+module.exports = model("User", userSchema);
